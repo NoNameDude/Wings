@@ -38,7 +38,7 @@ minetest.register_chatcommand("wings_effect", {
 minetest.register_on_joinplayer(function(player)
 	--check player privs 
     local name = player and player:get_player_name()
-    if player:get_attribute("No_wing_effect") then
+    if player:get_attribute("No_wing_effect") == nil then
         player:set_attribute("No_wing_effect", "False")
     end
     if player:get_attribute("No_wing_effect") == "True" then 
@@ -52,9 +52,9 @@ minetest.register_on_joinplayer(function(player)
         end
         --------------------------------------------------------------
                 
-        priv_to_get_revoked = fly 
+        priv_to_get_revoked = "fly" 
         for priviliges, _ in pairs(privs) do
-            privs[priviliges] = nil
+            privs[priv_to_get_revoked] = nil
         end 
 		minetest.set_player_privs(name, privs)
         
@@ -108,9 +108,9 @@ minetest.register_globalstep(function(dtime)
                 end
                 --------------------------------------------------------------
                 
-                priv_to_get_revoked = fly 
+                priv_to_get_revoked = "fly" 
                 for priviliges, _ in pairs(privs) do
-                    privs[priviliges] = nil
+                    privs[priv_to_get_revoked] = nil
                 end 
 			    minetest.set_player_privs(name, privs)
                 timer = 0 
